@@ -1,0 +1,336 @@
+{
+  "info": {
+    "_postman_id": "420c8608-ce87-4f95-b7d5-29f287db43e4",
+    "name": "Gayane Khachatryan",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "55576156",
+    "_collection_link": "https://go.postman.co/collection/55576156-420c8608-ce87-4f95-b7d5-29f287db43e4?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "admin_user",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{password8}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{username8}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/login/api",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "login",
+            "api"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "addcourse",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.environment.set(\"username\", \"admin_user\");\r",
+              " pm.environment.set(\"password\", \"11111111\");"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "const res = pm.response.json();\r",
+              "pm.environment.set(\"Token\", res.token);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"3d modeling\",\r\n  \"body\": \"advanced 3d modeling course\",\r\n  \"coursetype\": \"2\",\r\n  \"author\": \"Gayane Khachatryan\",\r\n  \"price\": 30\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/add_course/api",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "add_course",
+            "api"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "50%discaount",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.environment.set(\"username\", \"admin_user\");\r",
+              " pm.environment.set(\"password\", \"11111111\");"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "const res = pm.response.json();\r",
+              "pm.environment.set(\"Token\", res.token);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"course_type\": \"2\",\r\n  \"discount\": 50,\r\n  \"course_count\": 2\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/set_discount/api",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "set_discount",
+            "api"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "nonadmin",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.environment.set(\"username\", \"admin_user_maria\");\r",
+              " pm.environment.set(\"password\", \"12345678\");"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "const res = pm.response.json();\r",
+              "pm.environment.set(\"Token\", res.token);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{passwordnonadmin}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{usernamenonadmin}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/login/api",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "login",
+            "api"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "buy_course",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.environment.set(\"username\", \"admin_user_maria\");\r",
+              " pm.environment.set(\"password\", \"12345678\");"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "const res = pm.response.json();\r",
+              "pm.environment.set(\"Token\", res.token);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/buy_course/api/3046/admin_user_maria",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "buy_course",
+            "api",
+            "3046",
+            "admin_user_maria"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": ""
+    }
+  ]
+}
